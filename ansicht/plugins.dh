@@ -48,12 +48,14 @@ FUNCTION pgAus(name AS STRING) AS BOOLEAN
     RETURN FALSE
 END FUNCTION
 
-' Die Bibliothek dh_plugin.dh liegt neben der IDE: im Repository zwei
-' Ordner hoeher, in einer Installation neben der Laufzeit (unter macOS in
-' Resources). DH_PATH zeigt dorthin; ein Kind erbt die Umgebung.
+' Die Bibliothek dh_plugin.dh gehoert zur IDE von Drachenhauch. Gesucht wird
+' in einer Installation neben der Laufzeit (unter macOS in Resources), bei
+' einer selbst gebauten dhrt (rust/drachenhauch_runtime/target/release) im
+' ide/ ihres Repos, und im Drachenhauch-Repo neben diesem. DH_PATH zeigt
+' dorthin; ein Kind erbt die Umgebung.
 SUB pgPfadSetzen()
     DIM exe AS STRING : exe = DIRNAME(EXEPATH$())
-    DIM orte AS ARRAY OF STRING : orte = [PATHJOIN(CWD$(), "../../ide"), PATHJOIN(exe, "ide"), PATHJOIN(exe, "../Resources/ide")]
+    DIM orte AS ARRAY OF STRING : orte = [PATHJOIN(exe, "ide"), PATHJOIN(exe, "../Resources/ide"), PATHJOIN(exe, "../../../../ide"), PATHJOIN(CWD$(), "../Drachenhauch/ide")]
     DIM o AS STRING
     FOR EACH o IN orte
         IF FILEEXISTS(PATHJOIN(o, "dh_plugin.dh")) THEN

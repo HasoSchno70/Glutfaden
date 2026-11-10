@@ -1,6 +1,6 @@
 ' Helfer fuer glutfaden_stufe4.dhtest: Aufzeichnungen von PySticky lesen und
 ' den Bildimport des Kerns damit vergleichen. Eingebunden NACH dem Kern
-' (IMPORT ... AS kern). `daten` ist examples/glutfaden/daten.
+' (IMPORT ... AS kern). `daten` ist der Ordner daten/ dieses Repos.
 IMPORT "json"
 
 ' Die Einstellungen der Aufzeichnung, mit der Palette aus `daten`.

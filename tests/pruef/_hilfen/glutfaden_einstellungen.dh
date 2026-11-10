@@ -1,7 +1,7 @@
 ' Einstellungen als Text -- dieselben Zeilen, die ref_einstellungen.py aus
 ' PySticky aufzeichnet: ensure_contrast fuer Rasterfarben und das Fuellen mit
 ' Toleranz und diagonal (FillTool._scanline_fill/_diagonal_fill).
-IMPORT "../../../examples/glutfaden/kern/kern.dh" AS kern
+IMPORT "../../../kern/kern.dh" AS kern
 
 FUNCTION geHex6$(f AS INTEGER) AS STRING
     RETURN RIGHT$("000000" + HEX$(f BAND &HFFFFFF), 6)

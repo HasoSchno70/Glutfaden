@@ -1,0 +1,3 @@
+# Zeilenenden automatisch normalisieren (LF im Repo), wie in Drachenhauch
+* text=auto
+*.sh text eol=lf

@@ -2,7 +2,7 @@
 ' PyStickys GradientTool, MinimapWidget und TilePreviewWidget aufzeichnet.
 ' Die Minikarte als MD5 ueber ihre Punkte in Hex (zeilenweise, Umbruch
 ' dazwischen), eine Groesse auch Punkt fuer Punkt.
-IMPORT "../../../examples/glutfaden/kern/kern.dh" AS kern
+IMPORT "../../../kern/kern.dh" AS kern
 
 FUNCTION gfHex$(f AS INTEGER) AS STRING
     RETURN RIGHT$("000000" + HEX$(f BAND &HFFFFFF), 6)

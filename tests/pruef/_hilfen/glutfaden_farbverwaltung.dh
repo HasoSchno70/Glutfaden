@@ -24,7 +24,7 @@ FUNCTION fvRefOhneVerschoben$(ref AS STRING) AS STRING
     NEXT
     RETURN JOIN$(aus, CHR$(10))
 END FUNCTION
-IMPORT "../../../examples/glutfaden/kern/kern.dh" AS kern
+IMPORT "../../../kern/kern.dh" AS kern
 
 FUNCTION fvStand$(m AS kern.Muster) AS STRING
     DIM z AS ARRAY OF STRING : z = []

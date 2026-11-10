@@ -1,0 +1,47 @@
+# Prueft Glutfaden gegen die neueste freigegebene Fassung von Drachenhauch:
+# alle Pruefsammlungen in tests/pruef, die GTK-Proben auf einem virtuellen
+# Bildschirm (xvfb). Jeden Montag auch ohne Aenderung, damit eine neue
+# Drachenhauch-Fassung, die etwas bricht, auffaellt.
+#
+# dhrt kommt aus dem Linux-Paket des Releases; neben ihm liegt ide/ mit
+# dh_plugin.dh, das die Plugin-Proben (Stufe 26) brauchen.
+
+name: Pruefen
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "47 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: GTK, xvfb und die Bibliotheken fuer dhrt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth libgtk-3-0t64 libasound2t64 libudev1 libgl1 libegl1 libgles2 libx11-6 libxrandr2 libxi6 libxinerama1 libxcursor1 libwayland-client0 libxkbcommon0 fonts-dejavu-core
+
+      - name: Drachenhauch holen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download --repo HasoSchno70/Drachenhauch --pattern '*linux-x86_64.tar.gz' --dir "$RUNNER_TEMP"
+          tar -xzf "$RUNNER_TEMP"/*.tar.gz -C "$RUNNER_TEMP"
+          DHRT="$(find "$RUNNER_TEMP" -type f -name dhrt | head -n 1)"
+          chmod +x "$DHRT"
+          echo "DHRT=$DHRT" >> "$GITHUB_ENV"
+          "$DHRT" --version
+
+      - name: Pruefsammlungen
+        env:
+          DH_OHNE_AUDIO: "1"
+        run: xvfb-run -a "$DHRT" test tests/pruef

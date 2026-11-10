@@ -1,4 +1,4 @@
-' Die Oberflaeche des Glutfaden-Ports (examples/glutfaden, GTK 3) -- ueber
+' Die Oberflaeche des Glutfaden-Ports (GTK 3) -- ueber
 ' --probe bzw. --probe-bearbeiten, das sich selbst vorfuehrt, mit
 ' Bildschirmfotos (--foto). Ohne GTK mit Bildschirm ueberspringt sich der Fall.
 ' Format: docs/werkzeuge.md, dhrt test.
@@ -21,7 +21,7 @@ END IF
 --- datei helfer.dh
 IMPORT "{sammlung}/../_hilfen/dhrtlauf.dh"
 IMPORT "{sammlung}/../_hilfen/glutfaden_bild.dh"
-CONST BEISPIEL = "{sammlung}/../../../examples/glutfaden/main.dh"
+CONST BEISPIEL = "{sammlung}/../../../main.dh"
 --- erwartet
 rueckgabe 0
 geladen: TRUE, eingepasst: TRUE
@@ -57,7 +57,7 @@ END IF
 --- datei helfer.dh
 IMPORT "{sammlung}/../_hilfen/dhrtlauf.dh"
 IMPORT "{sammlung}/../_hilfen/glutfaden_bild.dh"
-CONST BEISPIEL = "{sammlung}/../../../examples/glutfaden/main.dh"
+CONST BEISPIEL = "{sammlung}/../../../main.dh"
 --- erwartet
 rueckgabe 0
 geladen: TRUE farben 6 geaendert FALSE
@@ -110,7 +110,7 @@ END IF
 --- datei helfer.dh
 IMPORT "{sammlung}/../_hilfen/dhrtlauf.dh"
 IMPORT "{sammlung}/../_hilfen/glutfaden_bild.dh"
-CONST BEISPIEL = "{sammlung}/../../../examples/glutfaden/main.dh"
+CONST BEISPIEL = "{sammlung}/../../../main.dh"
 --- erwartet
 rueckgabe 0
 geladen: TRUE blau 6 stiche 185
@@ -158,7 +158,7 @@ END IF
 --- datei helfer.dh
 IMPORT "{sammlung}/../_hilfen/dhrtlauf.dh"
 IMPORT "{sammlung}/../_hilfen/glutfaden_bild.dh"
-CONST BEISPIEL = "{sammlung}/../../../examples/glutfaden/main.dh"
+CONST BEISPIEL = "{sammlung}/../../../main.dh"
 --- erwartet
 rueckgabe 0
 dialog: TRUE bild 256x256
@@ -195,7 +195,7 @@ END IF
 --- datei helfer.dh
 IMPORT "{sammlung}/../_hilfen/dhrtlauf.dh"
 IMPORT "{sammlung}/../_hilfen/glutfaden_bild.dh"
-CONST BEISPIEL = "{sammlung}/../../../examples/glutfaden/main.dh"
+CONST BEISPIEL = "{sammlung}/../../../main.dh"
 --- erwartet
 rueckgabe 0
 dialog: zeilen je format 9 3 2 0 2 papiere 6 entsprechungen 15
