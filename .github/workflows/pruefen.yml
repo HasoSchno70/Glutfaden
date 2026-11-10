@@ -1,10 +1,16 @@
 # Prueft Glutfaden gegen die neueste freigegebene Fassung von Drachenhauch:
-# alle Pruefsammlungen in tests/pruef, die GTK-Proben auf einem virtuellen
-# Bildschirm (xvfb). Jeden Montag auch ohne Aenderung, damit eine neue
-# Drachenhauch-Fassung, die etwas bricht, auffaellt.
+# alle Pruefsammlungen in tests/pruef. Jeden Montag auch ohne Aenderung,
+# damit eine neue Drachenhauch-Fassung, die etwas bricht, auffaellt.
 #
-# dhrt kommt aus dem Linux-Paket des Releases; neben ihm liegt ide/ mit
-# dh_plugin.dh, das die Plugin-Proben (Stufe 26) brauchen.
+# OHNE Bildschirm, mit Absicht: die GTK-Proben (Fenster, Dialoge, Masse)
+# sind auf GTK unter Windows abgestimmt und ueberspringen sich hier ("kein
+# GTK mit Bildschirm") -- genau wie frueher in der Linux-CI von Drachenhauch.
+# Unter Linux mit xvfb weichen Schriftmasse und Fenstergroessen ab, und GTK
+# schreibt Warnungen auf stderr. Die GTK-Proben laufen lokal unter Windows:
+# dhrt test tests/pruef
+#
+# dhrt kommt aus dem Linux-Paket des Releases (es braucht libgtk-3 schon zum
+# Starten); neben ihm liegt ide/ mit dh_plugin.dh fuer die Plugin-Proben.
 
 name: Pruefen
 
@@ -25,10 +31,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: GTK, xvfb und die Bibliotheken fuer dhrt
+      - name: Bibliotheken fuer dhrt
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb xauth libgtk-3-0t64 libasound2t64 libudev1 libgl1 libegl1 libgles2 libx11-6 libxrandr2 libxi6 libxinerama1 libxcursor1 libwayland-client0 libxkbcommon0 fonts-dejavu-core
+          sudo apt-get install -y libgtk-3-0t64 libasound2t64 libudev1 libgl1 libegl1 libgles2 libx11-6 libxrandr2 libxi6 libxinerama1 libxcursor1 libwayland-client0 libxkbcommon0
 
       - name: Drachenhauch holen
         env:
@@ -44,4 +50,6 @@ jobs:
       - name: Pruefsammlungen
         env:
           DH_OHNE_AUDIO: "1"
-        run: xvfb-run -a "$DHRT" test tests/pruef
+        run: |
+          unset DISPLAY WAYLAND_DISPLAY
+          "$DHRT" test tests/pruef
